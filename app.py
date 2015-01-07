@@ -12,6 +12,7 @@ def index():
 # Return JSON 
 # {"receiptID" : "[unique identifier for the receipt]" , 
 	# "userID": "[unique identifier of who posted it]", 
+	# "vendor": "[vender of the transaction]",
 	# "date" :"[date of transaction]", 
 	# "totalCost" :"[cost]",
 	# "items": {"name": "[name]", "cost": "[$$}"}, 
