@@ -7,6 +7,10 @@ app = Flask(__name__)
 def index():
     return "Hello, World!"
 
+@app.route('/healthCheck', methods=['GET'])
+def healthCheck():
+	return "Health Check OK"
+
 #Input JSON 
 # {"receipt": "[some file]"}
 # Return JSON 
