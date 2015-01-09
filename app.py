@@ -2,6 +2,7 @@
 from flask import Flask
 from flask import request
 from flask import jsonify
+import re 
 
 app = Flask(__name__)
 
@@ -26,17 +27,18 @@ def healthCheck():
 #
 @app.route('/ocr', methods=['POST'])
 def ocr():
-	print "HERE"
 	if request.headers ['Content-Type'] == 'application/json': 
 		#Run all the OCR stuff should just take an image URL 
-		print "DERP"
 		originalImage = request.json["receipt"]
-		items = []
-		item = {'item': "",
-				'cost': ""}
-		items.append(item)
-		return jsonify({"originalImage": originalImage, 'vendor': "Costco", 
-			"date": "01/08/2014", "totalCost" :"$200", "items": items}), 200
+		if re.match(r'(.+\.jpg|png|gif)', originalImage):
+			items = []
+			item = {'item': "",
+					'cost': ""}
+			items.append(item)
+			return jsonify({"originalImage": originalImage, 'vendor': "Costco", 
+				"date": "01/08/2014", "totalCost" :"$200", "items": items}), 200
+		else:
+			return 400
 
 
 if __name__ == '__main__':
