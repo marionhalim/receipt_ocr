@@ -1,12 +1,14 @@
-#!flask/bin/python
 from flask import Flask
 from flask import request
 from flask import jsonify
-import re 
+import re
 
-app = Flask(__name__)
+app = Flask(__name__) 
 
-#ALL ROUTES 
+@app.route('/index') 
+def index(): 
+	return 
+	
 @app.route('/healthCheck', methods=['GET'])
 def healthCheck():
 	return "Health Check OK"
@@ -40,6 +42,6 @@ def ocr():
 		else:
 			return 400
 
-
 if __name__ == '__main__':
     app.run(debug=True)
+
