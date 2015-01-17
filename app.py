@@ -1,14 +1,13 @@
-from flask import Flask
-from flask import request
-from flask import jsonify
+from flask import Flask, request, jsonify
 import re
+from ocr import process_image
 
 app = Flask(__name__) 
 
 @app.route('/index') 
 def index(): 
-	return 
-	
+	return 'OK'
+
 @app.route('/healthCheck', methods=['GET'])
 def healthCheck():
 	return "Health Check OK"
@@ -30,17 +29,22 @@ def healthCheck():
 @app.route('/ocr', methods=['POST'])
 def ocr():
 	if request.headers ['Content-Type'] == 'application/json': 
-		#Run all the OCR stuff should just take an image URL 
-		originalImage = request.json["receipt"]
-		if re.match(r'(.+\.jpg|png|gif)', originalImage):
+		url = request.json["receipt"]
+		
+		if 'jpg' | 'png' in url: 
+			output = process_image(url)
 			items = []
 			item = {'item': "",
-					'cost': ""}
+				'cost': ""}
 			items.append(item)
 			return jsonify({"originalImage": originalImage, 'vendor': "Costco", 
 				"date": "01/08/2014", "totalCost" :"$200", "items": items}), 200
-		else:
-			return 400
+		else: 
+		 	return 'Error: File not recognize as jpg or png', 400
+	else:
+		return 'Error: Content Type is not application/json', 400
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
