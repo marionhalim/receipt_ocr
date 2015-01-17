@@ -30,20 +30,18 @@ def healthCheck():
 def ocr():
 	if request.headers ['Content-Type'] == 'application/json': 
 		url = request.json["receipt"]
-		
-		if 'jpg' | 'png' in url: 
+		if 'jpg' in url: 
 			output = process_image(url)
 			items = []
 			item = {'item': "",
 				'cost': ""}
 			items.append(item)
-			return jsonify({"originalImage": originalImage, 'vendor': "Costco", 
+			return jsonify({"originalImage": url, 'vendor': "Costco", 
 				"date": "01/08/2014", "totalCost" :"$200", "items": items}), 200
 		else: 
 		 	return 'Error: File not recognize as jpg or png', 400
 	else:
 		return 'Error: Content Type is not application/json', 400
-
 
 
 if __name__ == '__main__':
