@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 import re
-from ocr import process_image
+from ocr import process_jpg_image
 
 app = Flask(__name__) 
 
@@ -36,7 +36,7 @@ def ocr():
 			item = {'item': "",
 				'cost': ""}
 			items.append(item)
-			return jsonify({"originalImage": url, 'vendor': "Costco", 
+			return jsonify({"imageURL": url, 'vendor': "Costco", 
 				"date": "01/08/2014", "totalCost" :"$200", "items": items}), 200
 		else: 
 		 	return 'Error: File not recognize as jpg or png', 400
