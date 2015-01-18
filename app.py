@@ -1,12 +1,16 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 import re
 from ocr import process_jpg_image
 
 app = Flask(__name__) 
 
-@app.route('/index') 
-def index(): 
-	return 'OK'
+@app.route('/')
+def home():
+  return render_template('home.html')
+  
+@app.route('/about')
+def about():
+  return render_template('about.html')
 
 @app.route('/healthCheck', methods=['GET'])
 def healthCheck():
