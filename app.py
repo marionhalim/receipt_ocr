@@ -1,8 +1,10 @@
 from flask import Flask, request, jsonify, render_template
+from flask.ext import restful
 import re
 from ocr import process_jpg_image
 
 app = Flask(__name__) 
+api = restful.Api(app)
 
 @app.route('/')
 def home():
@@ -16,20 +18,19 @@ def about():
 def healthCheck():
 	return "Health Check OK"
 
-#Input JSON 
-# {"receipt": "[some file]"}
-# Return JSON 
-# {"receiptID" : "[unique identifier for the receipt]" , 
-	# "userID": "[unique identifier of who posted it]", 
-	# "originalImage: "[original Image URL]",
-	# "vendor": "[vender of the transaction]",
-	# "date" :"[date of transaction]", 
-	# "totalCost" :"[cost]",
-	# "items": {"name": "[name]", "cost": "[$$}"}, 
-	# 		{"name": "[name]", "cost": "[$$}"}, 
-	# 		{"name": "[name]", "cost": "[$$}"}, 
-	# 		{"name": "[name]", "cost": "[$$}"}}
-#
+"""
+Input JSON: {"receipt": "[some file]"}
+Return JSON: {"receiptID" : "[unique identifier for the receipt]" , 
+				"userID": "[unique identifier of who posted it]", 
+				"originalImage: "[original Image URL]",
+				"vendor": "[vender of the transaction]",
+				"date" :"[date of transaction]", 
+				"totalCost" :"[cost]",
+				"items": {"name": "[name]", "cost": "[$$}"}, 
+					{"name": "[name]", "cost": "[$$}"}, 
+					{"name": "[name]", "cost": "[$$}"}, 
+					{"name": "[name]", "cost": "[$$}"}}
+"""
 @app.route('/ocr', methods=['POST'])
 def ocr():
 	if request.headers ['Content-Type'] == 'application/json': 
