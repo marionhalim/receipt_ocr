@@ -6,6 +6,12 @@ from ocr import process_jpg_image
 app = Flask(__name__) 
 api = restful.Api(app)
 
+class HealthCheck(restful.Resource):
+    def get(self):
+        return {'Health Check': 'OK'}
+
+api.add_resource(HealthCheck, '/healthCheck')
+
 @app.route('/')
 def home():
   return render_template('home.html')
