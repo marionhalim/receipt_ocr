@@ -1,6 +1,9 @@
-from flask import Flask, request, jsonify, render_template
+
+from flask import Flask, request, jsonify
 from flask.ext import restful
+from flask.ext.restful import reqparse
 import re
+from requests import get, put, post, delete
 from ocr import process_jpg_image
 
 app = Flask(__name__) 
@@ -8,21 +11,17 @@ api = restful.Api(app)
 
 class HealthCheck(restful.Resource):
     def get(self):
-        return {'Health Check': 'OK'}
+        return {'Health Check': 'OK'}, 200
+
+class ocr(restful.Resource):
+	def post(self): 
+		parser = reqparse.RequestParser()
+		parser.add_argument('url', type=inputs.url(), help='Enter a valid URL')
+		args = parser.parse_args()
+		return {'Test':'OK'}, 200
 
 api.add_resource(HealthCheck, '/healthCheck')
-
-@app.route('/')
-def home():
-  return render_template('home.html')
-  
-@app.route('/about')
-def about():
-  return render_template('about.html')
-
-@app.route('/healthCheck', methods=['GET'])
-def healthCheck():
-	return "Health Check OK"
+api.add_resource(ocr, '/ocr')
 
 """
 Input JSON: {"receipt": "[some file]"}
@@ -53,8 +52,3 @@ def ocr():
 		 	return 'Error: File not recognize as jpg or png', 400
 	else:
 		return 'Error: Content Type is not application/json', 400
-
-
-if __name__ == '__main__':
-    app.run(debug=True)
-
