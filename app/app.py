@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify, render_template
 from flask.ext import restful
 import re
 from ocr import process_jpg_image
+from receipt
 
 app = Flask(__name__) 
 api = restful.Api(app)

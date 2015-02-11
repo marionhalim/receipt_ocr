@@ -23,11 +23,11 @@ def _get_image(url):
 @return a sharpened image of the original image, default 1
 """
 def sharpen(input, num): 
-	image = input.filter(ImageFilter.SHARPEN)
-	sharpen_more = num - 1
-	for n in sharpen_more: 
-		image = image.filter(ImageFilter.SHARPEN)
-	return image
+    image = input.filter(ImageFilter.SHARPEN)
+    sharpen_more = num - 1
+    for n in sharpen_more: 
+        image = image.filter(ImageFilter.SHARPEN)
+    return image
 
 """
 Takes in an image, calls pytesseract and returns a string
@@ -57,6 +57,7 @@ def collect_names_prices(string_receipt):
 Assumptions:
 -price is in decimal
 -item and price are on the same line
+- Uses Regex
 
 """
 def get_name_and_price(line):
@@ -68,9 +69,25 @@ def get_name_and_price(line):
     else:
         return None
 
+
+
+
+
+
+
+#Get unit testing working (Marion)
+#Alternative ways of reading or analyzing? Other OCR library? (Marion)
+
+#Building this to an actual class? (Jeff)
+#Smoothing techniques // dictionary and possible letters that are always wrong (Jeff)
+
+
+
+#AJAX calls 
+#Deployment 
+#UI Shape up
+#png vs jpeg and other image formats 
+
 # Temporary. Takes in a file name for ease of testing
 def file_to_string(filepath):
     return image_to_string(Image.open(filepath))
-
-
-
