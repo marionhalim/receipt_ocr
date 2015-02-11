@@ -19,14 +19,7 @@ class receipt():
 		self.items[item] = cost
 		return True
 
-	"""@return a JSON string of the receipt"""
-	def toJSON(self):
-		return 
-
-
-
 	"""Method to validate file path"""
-
 
 	"""Method to validate userID"""
 
