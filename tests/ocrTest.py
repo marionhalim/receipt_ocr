@@ -1,4 +1,8 @@
 import unittest
+import sys
+sys.path.append("../")
+#import app
+from ocr import *
 
 class OCRTestCase(unittest.TestCase):
     """Tests for `ocr.py."""
