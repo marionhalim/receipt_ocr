@@ -48,6 +48,7 @@ def collect_names_prices(string_receipt):
             name = name_and_price[0]
             price = name_and_price[1]
             output[name] = price
+    print(output)
     return output
 
 """
@@ -70,18 +71,10 @@ def get_name_and_price(line):
         return None
 
 
-
-
-
-
-
-#Get unit testing working (Marion)
 #Alternative ways of reading or analyzing? Other OCR library? (Marion)
 
 #Building this to an actual class? (Jeff)
 #Smoothing techniques // dictionary and possible letters that are always wrong (Jeff)
-
-
 
 #AJAX calls 
 #Deployment 

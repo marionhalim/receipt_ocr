@@ -7,20 +7,18 @@ from ocr import *
 
 """Tests for ocr.py."""
 
-FILE_PATH = ""
+FILE_PATH = "/Users/jchen/Documents/workspace/receipt_ocr/images"
 
 class OCRTestCase(unittest.TestCase):
 
-	
-	"""Tests the collect names and prices method"""
-	def test_collect_names_prices(self):
-		stuff = file_to_string(FILE_PATH + "/restaurant.png")
-		print stuff
-		x = (collect_names_prices(stuff))
-		print "Printing all that are collected"
-		print x
-		for name in x:
-			print(name, x[name])
+	"""Tests the collect names and prices method. Uses restaurant.png"""
+	def test_collect_names_prices_1(self):
+		print("Testing collecting names and prices from restaurant.png")
+		print("-----------------------")
+		receipt_file = file_to_string(FILE_PATH + "/restaurant.png")
+		receipt = (collect_names_prices(receipt_file))
+		self.assertEqual('2.00', receipt['Brown R1ce'])
+		self.assertEqual('9.50', receipt['44 G1nger Lover'])
 
 	"""Tests and name and prices method"""
 	def test_Name_and_Price(self):
@@ -32,7 +30,6 @@ class OCRTestCase(unittest.TestCase):
 		test6 = "Brown Rice 12.00"
 		test7 = "Pad Thai 13"
 		test8 = "Super awesome Indonesian mie tek tek $12.99"
-
 
 		print("Testing Name and Price")
 		print("-----------------------")
